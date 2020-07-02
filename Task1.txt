@@ -1,0 +1,36 @@
+Dear Sir/Madam,
+Thank you for providing us with the three datasets from Sprocket Central Pty Ltd. The table highlights the summary statistics of the  datasets received. 
+Datasets Name           No.of Records               Distinct Customer ID's              Date Data Received
+Customer                        --Value--                              --Value--                                          --Value--
+Demographic
+
+Customer Address        --Value--                              --Value--                                         --Value--
+Transaction Data            --Value--                              --Value--                                        --Value--
+Some data quality issues  were encountered and few methods were used to mitigate the identified data inconsistencies .Further, recommendations have been provided to avoid the reoccurrence of data quality issues and improve the accuracy of the underlying data used to drive business decisions.
+
+1. Various columns, such as the brand of a purchase, or job title, have empty values in
+certain records
+Mitigation: If only a small number of rows are empty, filter out the record entirely from the training set for
+prediction. Else, if it is a core field, impute based on distribution in the training dataset.
+For key datasets, such as transactions, less than 1% of transactions (totalling less than 0.1% of
+revenue) have missing fields. These records have been removed from the training dataset.
+
+2.Inconsistent values for the same attribute
+(e.g. Victoria being represented as “V”, “Vic” and “Victoria”)
+Mitigation: Use regular expression to replaced extended values into abbreviations to ensure consistency across addresses.
+Recommendation: Enforce a drop-down list for the user entering the data rather than a free text field.In order to construct meaningful variables for the model, the data has been cleaned to avoid multiple representations of the same value. Additionally, gender records where ‘U’ have been replaced based on the distribution from the training dataset.
+
+3. Additional customer_ids in the ‘Transactions table’ and ‘Customer Address table’
+but not in ‘Customer Master (Customer Demographic)’
+Mitigation: Please ensure that all tables are from the same period. Only customers in the Customer Master list will be used as a training set for our model.
+This indicates that the data received may not be in sync with each other which may skew the
+analysis results if there are missing data records. Please refer to excel file ‘data_outliers.xlsx’ for the list of outliers between tables.
+
+4. Inconsistent data type for the sameattribute (e.g. numeric values for some fields and strings for others)
+Mitigation: Convert selected records in characters to numeric. Remove non-numeric characters from string.
+Recommendation: Ensure that fact tables in the given database have constraints on data types. Having different data types for a given field make it difficult to interpret results at the later stage.Therefore, appropriate data transformations are made to ensure consistent data types for a given field.
+
+In the further process our team will still keep working on normalizing and standardizing data .Any further clarifications feel free to contact us.Thank You
+
+Thanks and Regards
+
